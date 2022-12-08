@@ -1,0 +1,27 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url(assets/fonts/OpenSans/OpenSans-Medium.ttf);
+}
+h1 {
+  font-family: myFirstFont;
+}
+div {
+    /* color: white; */
+    /* background: red; */
+    padding: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    border-radius: 5%;
+}   
+button {
+    height: 50px;
+  width: 50px;  
+    background-color: #5f3dc4;
+    color: #eee;
+    border:2px solid #5f3dc4;
+    border-radius: 50%;
+  }

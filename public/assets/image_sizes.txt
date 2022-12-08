@@ -1,0 +1,5 @@
+face: 160x160
+happy: 160x160
+sad: 160x160
+super_happy: 160x160
+super_sad: 160x160
