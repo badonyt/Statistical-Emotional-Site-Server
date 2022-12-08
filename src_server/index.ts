@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/afterpost', function (req, res) {
+app.post('/afterpost', function (req: any, res: any) {
     console.log(req.body)
     res.send('Hello after post');
     console.log("Test")

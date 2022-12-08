@@ -1,18 +1,23 @@
 {
   "dependencies": {
+    "concurrently": "^7.6.0",
     "express": "^4.18.2",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.4"
   },
   "name": "expressjs",
   "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {},
+  "main": "dist_server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "devstart": "nodemon app.js"
+    "devstart:ts":"tsc -w",
+    "devstart:express": "nodemon /dist_server/index.js",
+    "devstart": "concurrently npm:devstart:*"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^18.11.11"
+  }
 }
