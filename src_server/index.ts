@@ -15,8 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/afterpost', function (req: any, res: any) {
     console.log(req.body)
+    const reqbodyparsed = new URLSearchParams(req.body).toString();
+    const data = String(reqbodyparsed).split('=')[0]
+    console.log(data)
     res.send('Hello after post');
-    console.log("Test")
 });
 
 app.listen(3000);
