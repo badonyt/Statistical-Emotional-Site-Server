@@ -4,19 +4,19 @@ const btn3 = document.getElementById("btn-3");
 const btn4 = document.getElementById("btn-4");
 const btn5 = document.getElementById("btn-5");
 btn1.addEventListener("click", function () {
-    fetchget("superhappy")
+    fetchget("Super_Happy")
 });
 btn2.addEventListener("click", function () {
-    fetchget("happy")
+    fetchget("Happy")
 });
 btn3.addEventListener("click", function () {
-    fetchget("face")
+    fetchget("Face")
 });
 btn4.addEventListener("click", function () {
-    fetchget("sad")
+    fetchget("Sad")
 });
 btn5.addEventListener("click", function () {
-    fetchget("supersad")
+    fetchget("Super_Sad")
 });
 
 function fetchget(data) {
