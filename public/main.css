@@ -5,7 +5,10 @@
 h1 {
   font-family: myFirstFont;
 }
-div {
+h2 {
+  font-family: myFirstFont;
+}
+.center_div_button {
     /* color: white; */
     /* background: red; */
     padding: 15px;
@@ -24,4 +27,12 @@ button {
     color: #eee;
     border:2px solid #5f3dc4;
     border-radius: 50%;
+    cursor: pointer;
   }
+
+p{
+  font-family: myFirstFont;
+}
+a{
+  font-family: myFirstFont;
+}
