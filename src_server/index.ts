@@ -18,19 +18,43 @@ app.post('/afterpost', function (req: any, res: any) {
     const reqbodyparsed = new URLSearchParams(req.body).toString();
     const data = String(reqbodyparsed).split('=')[0]
     console.log(data)
-    addtocsv_js(data)
+    //addtocsv_js(data, "./data/Data.csv")
     res.send('Hello after post');
+    if(checkDirectory('./data')){
+        if(file_exist("./data/"+getdaymonthyear()+".csv") == true){
+            addtocsv_js(data, "./data/"+getdaymonthyear()+".csv")
+        }else{
+            writecsv(getdaymonthyear())
+            addtocsv_js(data, "./data/"+getdaymonthyear()+".csv")
+        }
+    }else{
+        const fs = require('fs');
+        fs.mkdir("./data", (error: any) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("New Directory created successfully !!");
+                if(file_exist("./data/"+getdaymonthyear()+".csv") == true){
+                    addtocsv_js(data, "./data/"+getdaymonthyear()+".csv")
+                }else{
+                    writecsv(getdaymonthyear())
+                    addtocsv_js(data, "./data/"+getdaymonthyear()+".csv")
+                }
+            }
+        });
+    }
+    
 });
 
 app.listen(3000);
 console.log('Express started on port 3000');
-function addtocsv_js(data: string, where: string = "0") {
+function addtocsv_js(data: string, path:string, where: string = "0"):string {
     const PythonShell = require('python-shell').PythonShell;
 
     var options = {
         mode: 'text',
         pythonOptions: ['-u'],
-        args: [where, data]
+        args: [where, data, path]
     };
 
     PythonShell.run('./addtocsv.py', options, function (err: any, results: any) {
@@ -38,5 +62,54 @@ function addtocsv_js(data: string, where: string = "0") {
             throw err;
         // Results is an array consisting of messages collected during execution
         console.log('results: %j', results);
+        return("Data has been put on csv")
     });
+    return("error has occured. I dont what this error might signify")
+}
+
+function getdaymonthyear():string{
+    const date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDay();
+    return String(year) + "."+  String(month) +"."+ String(day)
+}
+
+function file_exist(path: string): boolean{
+    const fs = require('fs');
+    if (fs.existsSync(path)) {
+        return true
+    } else {
+        return false
+    }
+}
+
+
+function writecsv(name:string){
+    // (A) DATA ARRAY
+    var data = [
+        ["Super_Happy","Happy","Face","Sad","Super_Sad"],
+        ["0","0","0","0","0"]
+    ];
+  
+  // (B) TO CSV STRING
+  var csv = "";
+  for (let i of data) {
+    csv += i.join(",") + "\r\n";
+  }
+  
+  // (C) WRITE TO FILE
+  const fs = require("fs");
+  fs.writeFileSync("./data/"+name+".csv", csv);
+  console.log("Done!");
+}
+
+
+function checkDirectory(path:string):boolean{
+    const fs = require('fs');
+    if (fs.existsSync(path)) {
+        return true
+    } else {
+        return false
+    }
 }
