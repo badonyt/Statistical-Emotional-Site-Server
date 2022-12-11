@@ -22,10 +22,18 @@ app.post('/afterpost', function (req: any, res: any) {
     res.send('Hello after post');
     if(checkDirectory('./data')){
         if(file_exist("./data/"+getdaymonthyear()+".csv") == true){
+            const start = Date.now();
             addtocsv_js(data, "./data/"+getdaymonthyear()+".csv")
+            const end = Date.now();
+            const elapsed = end - start; 
+            console.log("Took "+elapsed + " to add to csv.")
         }else{
             writecsv(getdaymonthyear())
+            const start = Date.now();
             addtocsv_js(data, "./data/"+getdaymonthyear()+".csv")
+            const end = Date.now();
+            const elapsed = end - start; 
+            console.log("Took "+elapsed + " to add to csv.")
         }
     }else{
         const fs = require('fs');
@@ -35,10 +43,18 @@ app.post('/afterpost', function (req: any, res: any) {
             } else {
                 console.log("New Directory created successfully !!");
                 if(file_exist("./data/"+getdaymonthyear()+".csv") == true){
+                    const start = Date.now();
                     addtocsv_js(data, "./data/"+getdaymonthyear()+".csv")
+                    const end = Date.now();
+                    const elapsed = end - start; 
+                    console.log("Took "+elapsed + " to add to csv.")
                 }else{
                     writecsv(getdaymonthyear())
+                    const start = Date.now();
                     addtocsv_js(data, "./data/"+getdaymonthyear()+".csv")
+                    const end = Date.now();
+                    const elapsed = end - start; 
+                    console.log("Took "+elapsed + " to add to csv.")
                 }
             }
         });
@@ -69,10 +85,8 @@ function addtocsv_js(data: string, path:string, where: string = "0"):string {
 
 function getdaymonthyear():string{
     const date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth();
-    let day = date.getDay();
-    return String(year) + "."+  String(month) +"."+ String(day)
+    const newtext = date.toLocaleDateString().replace('/', '.').replace('/', ".")
+    return newtext
 }
 
 function file_exist(path: string): boolean{
