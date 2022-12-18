@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 
 
 pd.options.plotting.backend = "plotly"
-df = pd.read_csv("./data.csv", header=0)
+df = pd.read_csv("./data/data.csv", header=0)
 
 print(df)
 

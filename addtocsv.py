@@ -1,16 +1,26 @@
 import sys
-
-#print(sys.argv[0])
-# importing the pandas library
 import pandas as pd
-# reading the csv file
-df = pd.read_csv(sys.argv[3])
-prev = df.loc[int(sys.argv[1]), sys.argv[2]]
-# updating the column value/data
-df.loc[int(sys.argv[1]), sys.argv[2]] = str(int(prev ) +1)
+import csv
+trust = 0
 
-# writing into the file
-df.to_csv(sys.argv[3], index=False)
+df = pd.read_csv('./data/data.csv')
+found = False
+with open("./data/data.csv", "r") as f:
+    csvreader = csv.reader(f, delimiter=",")
+    for row in csvreader:
+        print(row)
+        if sys.argv[2] in row[0]:
+            print ("2016 spotted")
+            found = True
+            break
+       
+        trust+=1
 
-#print(df)
-print(prev)
+
+if found == False:     
+    df = df.append({'Date':sys.argv[2], 'Super_Happy':0, 'Happy':0, 'Face':0, 'Sad': 0, 'Super_Sad': 0}, ignore_index=True)
+
+df.loc[trust-1,sys.argv[1]] = int(df.loc[trust-1,sys.argv[1]]) + 1
+
+
+df.to_csv("./data/data.csv", index=False)
